@@ -1,0 +1,174 @@
+MySQL Milestone:
+
+1. Create a table with suitable constraints and fill the table with following dataset.
+------------------------------
+
+mysql> create table teacher(Teacher_id int, Name varchar(50), Department varchar(50), Date_of_admission date, Salary double(10,2), Gender varchar(25));
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+mysql> desc teacher;
++-------------------+--------------+------+-----+---------+-------+
+| Field             | Type         | Null | Key | Default | Extra |
++-------------------+--------------+------+-----+---------+-------+
+| Teacher_id        | int          | YES  |     | NULL    |       |
+| Name              | varchar(50)  | YES  |     | NULL    |       |
+| Department        | varchar(50)  | YES  |     | NULL    |       |
+| Date_of_admission | date         | YES  |     | NULL    |       |
+| Salary            | double(10,2) | YES  |     | NULL    |       |
+| Gender            | varchar(25)  | YES  |     | NULL    |       |
++-------------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+
+mysql> insert into teacher values(1001, 'Saravanan', 'English', '2023-01-05', 15999, 'Male'),(1002, 'Rajesh', 'Tamil', '2023-02-15', 18999, 'Male'),
+(1003, 'Santhosh', 'Maths', '2023-10-15', 15599, 'Male'),(1004, 'Raj', 'Social', '2023-12-25', 12999, 'Male'),(1005, 'Gowtham', 'History', '2022-02-28', 10999, 'Male'),
+(1006, 'Sanjay', 'Commerce', '2022-02-08', 16599, 'Male'),(1007, 'Sanjana', 'Biology', '2022-01-08', 14999, 'Female'),
+(1008, 'Anu', 'Acoounts', '2023-08-30', 21999, 'Female'),(1009, 'Dhivya', 'CS', '2023-05-11', 25999, 'Female'),(1010, 'Priya', 'Physics', '2022-01-18', 22099, 'Female');
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from teacher;
++------------+----------+------------+-------------------+----------+--------+
+| Teacher_id | Name     | Department | Date_of_admission | Salary   | Gender |
++------------+----------+------------+-------------------+----------+--------+
+|       1001 | Saravanan  | English    | 2023-01-05        | 15999.00 | Male   |
+|       1002 | Rajesh   | Tamil      | 2023-02-15        | 18999.00 | Male   |
+|       1003 | Santhosh | Maths      | 2023-10-15        | 15599.00 | Male   |
+|       1004 | Raj      | Social     | 2023-12-25        | 12999.00 | Male   |
+|       1005 | Gowtham  | History    | 2022-02-28        | 10999.00 | Male   |
+|       1006 | Sanjay   | Commerce   | 2022-02-08        | 16599.00 | Male   |
+|       1007 | Sanjana  | Biology    | 2022-01-08        | 14999.00 | Female |
+|       1008 | Anu      | Acoounts   | 2023-08-30        | 21999.00 | Female |
+|       1009 | Dhivya   | CS         | 2023-05-11        | 25999.00 | Female |
+|       1010 | Priya    | Physics    | 2022-01-18        | 22099.00 | Female |
++------------+----------+------------+-------------------+----------+--------+
+10 rows in set (0.00 sec)
+
+2. Write an SQL Query to select all the information of teachers in computer department.
+----------------------------------------
+
+mysql> select * from teacher where Department = 'CS';
++------------+---------+------------+-------------------+----------+--------+
+| Teacher_id | Name    | Department | Date_of_admission | Salary   | Gender |
++------------+---------+------------+-------------------+----------+--------+
+|       1001 | Saravanan | CS         | 2023-01-05        | 15999.00 | Male   |
+|       1009 | Dhivya  | CS         | 2023-05-11        | 25999.00 | Female |
++------------+---------+------------+-------------------+----------+--------+
+2 rows in set (0.00 sec)
+
+3. Weste a query to list the name of female teachers in History department.
+---------------------------------------
+
+mysql> SELECT Name FROM Teacher WHERE Department = 'History' AND Gender = 'Female';
++----------+
+| Name     |
++----------+
+| Harshini |
++----------+
+1 row in set (0.00 sec)
+
+4. list all names of teachers with date of admission in ascending order
+----------------------------------------
+
+mysql> select Name, Date_of_admission from teacher ORDER BY Date_of_admission ASC;
++----------+-------------------+
+| Name     | Date_of_admission |
++----------+-------------------+
+| Sanjana  | 2022-01-08        |
+| Priya    | 2022-01-18        |
+| Sanjay   | 2022-02-08        |
+| Harshini | 2022-02-28        |
+| Saravanan  | 2023-01-05        |
+| Rajesh   | 2023-02-15        |
+| Dhivya   | 2023-05-11        |
+| Anu      | 2023-08-30        |
+| Santhosh | 2023-10-15        |
+| Raj      | 2023-12-25        |
++----------+-------------------+
+10 rows in set (0.00 sec)
+
+5. display Teacher's name, Department, and Salary of male teacher.
+--------------------------------------
+
+mysql> select Name, Department, Salary FROM teacher WHERE Gender = 'Male';
++----------+------------+----------+
+| Name     | Department | Salary   |
++----------+------------+----------+
+| Saravanan  | CS         | 15999.00 |
+| Rajesh   | Tamil      | 18999.00 |
+| Santhosh | Maths      | 15599.00 |
+| Raj      | Social     | 12999.00 |
+| Sanjay   | Commerce   | 16599.00 |
++----------+------------+----------+
+5 rows in set (0.00 sec)
+
+6. To count the number of items whose salary is less than 10,000
+-------------------------------------
+
+mysql> select COUNT(*) FROM teacher WHERE Salary < 10000;
++----------+
+| COUNT(*) |
++----------+
+|        0 |
++----------+
+1 row in set (0.01 sec)
+
+
+
+07. Ta insert a new record in the Teacher table with the following data: 8, "Mersha". computer" [1/1/2000.12000,"m"]
+---------------------------------------
+
+mysql> insert into teacher values(8, 'Mersha', 'Computer', '2000-01-01', 12000, 'M');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from teacher;
++------------+----------+------------+-------------------+----------+--------+
+| Teacher_id | Name     | Department | Date_of_admission | Salary   | Gender |
++------------+----------+------------+-------------------+----------+--------+
+|       1001 | Saravanan  | CS         | 2023-01-05        | 15999.00 | Male   |
+|       1002 | Rajesh   | Tamil      | 2023-02-15        | 18999.00 | Male   |
+|       1003 | Santhosh | Maths      | 2023-10-15        | 15599.00 | Male   |
+|       1004 | Raj      | Social     | 2023-12-25        | 12999.00 | Male   |
+|       1005 | Harshini | History    | 2022-02-28        | 10999.00 | Female |
+|       1006 | Sanjay   | Commerce   | 2022-02-08        | 16599.00 | Male   |
+|       1007 | Sanjana  | Biology    | 2022-01-08        | 14999.00 | Female |
+|       1008 | Anu      | Acoounts   | 2023-08-30        | 21999.00 | Female |
+|       1009 | Dhivya   | CS         | 2023-05-11        | 25999.00 | Female |
+|       1010 | Priya    | Physics    | 2022-01-18        | 22099.00 | Female |
+|          8 | Mersha   | Computer   | 2000-01-01        | 12000.00 | M      |
++------------+----------+------------+-------------------+----------+--------+
+11 rows in set (0.00 sec)
+
+8. List the teacher detail who is getting the minimum salary.
+------------------------------------------
+
+mysql> select * from teacher where Salary = (select min(Salary) from teacher);
++------------+----------+------------+-------------------+----------+--------+
+| Teacher_id | Name     | Department | Date_of_admission | Salary   | Gender |
++------------+----------+------------+-------------------+----------+--------+
+|       1005 | Harshini | History    | 2022-02-28        | 10999.00 | Female |
++------------+----------+------------+-------------------+----------+--------+
+1 row in set (0.00 sec)
+
+9. List the teacher detail who is getting the second minimum salary.
+------------------------------------------
+
+mysql> select * from teacher where Salary = (select min(Salary) from teacher where salary > (select min(Salary) from teacher))
+    -> ;
++------------+--------+------------+-------------------+----------+--------+
+| Teacher_id | Name   | Department | Date_of_admission | Salary   | Gender |
++------------+--------+------------+-------------------+----------+--------+
+|          8 | Mersha | Computer   | 2000-01-01        | 12000.00 | M      |
++------------+--------+------------+-------------------+----------+--------+
+1 row in set (0.00 sec)
+
+10. list down the average salary of the teachers belongs to history department.
+-----------------------------------------
+
+mysql> select AVG(SALARY) AS AverageSalary from teacher where Department = 'History';
++---------------+
+| AverageSalary |
++---------------+
+|  10999.000000 |
++---------------+
+1 row in set (0.01 sec)
